@@ -16,6 +16,11 @@
 </head>
 
 <body>
+    <div>Teachable Machine Image Model</div>
+<button type="button" onclick="init()">Start</button>
+
+
+
 <div id="webcam-container"></div>
 <div id="label-container"></div>
 <div id="label-container2"></div>
@@ -35,10 +40,10 @@
     
     //const URL = "https://teachablemachine.withgoogle.com/models/tIGFq2epH/"; //여기를 나중에 로컬 경로로 수정할 것. 
     //const URL = "C:/Users/wonju/OneDrive/Desktop/Structure_Image_Analysis/tm-my-image-model/";
-
+    //try{
     const URL = "https://teachablemachine.withgoogle.com/models/kx8FXr73V/"; //여기를 나중에 로컬 경로로 수정할 것. 구조부재인지 아닌지 여기서 파악.
     const URL2 = "https://teachablemachine.withgoogle.com/models/iylRCPJXS/"; //여기를 나중에 로컬 경로로 수정할 것. 구조부재인지 아닌지 여기서 파악.
-
+    //}catch{alert("인공지능 모델을 불러오는데 실패.")}
 
     let model, webcam, labelContainer, maxPredictions, result1;
     //const URL = "C:/Users/wonju/OneDrive/Desktop/Structure_Image_Analysis/tm-my-image-model/";
@@ -62,7 +67,7 @@
         maxPredictions = model.getTotalClasses();
         model2 = await tmImage.load(modelURL2, metadataURL2);
         maxPredictions2 = model2.getTotalClasses();
-
+        try{
         // Convenience function to setup a webcam
         const flip = true; // whether to flip the webcam
         webcam = new tmImage.Webcam(200, 200, flip); // width, height, flip
@@ -88,6 +93,7 @@
         for (let i = 0; i < maxPredictions2; i++) { // and class labels
             labelContainer2.appendChild(document.createElement("div"));
         }
+        }catch{alert("카메라 감지 실패.")}
     }
 
    
@@ -100,9 +106,13 @@
     async function loop() {
         window.speechSynthesis.cancel();
         webcam.update(); // update the webcam frame
+        
+        try{
         await predict();
         await predict2();
         resultsay();
+        }catch{alert("예측 실패")}
+
         await delay(5000); //시간 조절은 여기서.
         window.requestAnimationFrame(loop);
     }
