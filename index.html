@@ -2,6 +2,9 @@
 <html lang="en">
 
 <head>
+    <link rel="stylesheet" href="style.css">
+
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,35 +20,47 @@
 </head>
 
 <body>
-    <div>클릭하여 분석 시작!!!!</div>
-    <button type="button" onclick="init()">Start</button>
+    <h1 class="title">인공지능 균열위험도 판독기</h1>
+    <h2 class="subtitle">"자가진단을 통해 우리집이 안전한지 알아보아요.(아직 바닥은 못해요. ^ㅡ^)"</h2>
+    <h1 class="title">인공지능 지진균열위험도 판독기</h1>
+    <h2 class="subtitle">"지진으로 발생한 균열의 위험도를 판단할 수 있습니다."</h2>
+    <div class="image-upload-wrap">
+        <canvas id="facecanvas"></canvas>
 
-    <canvas id="facecanvas"></canvas>
-
-    <!-- Video that handles the browser access to the camera. The transforms mirror the feed -->
-
-    <video autoplay muted hidden playsinline id="video" style="
+        <!-- Video that handles the browser access to the camera. The transforms mirror the feed -->
+        <div id="file-upload-input">
+            <video autoplay muted hidden playsinline id="video" style="
     -webkit-transform: scaleX(-1);
     transform: scaleX(-1);
     width: auto;
     height: auto;">
-    </video>
+            </video>
+        </div>
+    </div>
+    <div class="image-title-wrap">
+        <button class="file-upload-btn" type="button" onclick="init()">시작하기!</button>
+        <button class="file-upload-btn-red" type="button" onclick="abort = true">일시정지!</button>
 
-
-    <div id="webcam-container"></div>
+    </div>
+<div class="resultData">
     <div id="label-container"></div>
     <div id="label-container2"></div>
     <div id="resultTitle"></div>
     <div id="resultExplain"></div>
     <div id="resultCeleb"></div>
+    </div>
 
+    <!--button class="return-home" type="button" onclick="location.href='https://dktool.netlify.app/main.html';">홈으로 돌아가기</button-->
 
 
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8/dist/teachablemachine-image.min.js"></script>
     <script type="text/javascript">
+
         // More API functions here:
         // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/image
+        document.getElementById("label-container").style.display = 'none';
+        document.getElementById("label-container2").style.display = 'none';
 
         // the link to your model provided by Teachable Machine export panel
 
@@ -62,10 +77,16 @@
         //const URL = "C:/Users/wonju/OneDrive/Desktop/Structure_Image_Analysis/tm-my-image-model/";
 
         var img1 = document.createElement("img");
+        var abort = false;
 
 
         // Load the image model and setup the webcam
         async function init() {
+             abort = false;
+
+            var button = document.getElementsByClassName("file-upload-btn");
+            button.innerHTML = "재시작!";
+
             const modelURL = URL + "model.json";
             const metadataURL = URL + "metadata.json";
 
@@ -93,12 +114,12 @@
 
 
             //window.requestAnimationFrame(loop);
-            if(window.requestAnimationFrame){ window.requestAnimationFrame(loop);}
-            else if(window.webkitRequestAnimationFrame){ window.webkitRequestAnimationFrame(loop);}
-            else if(window.mozRequestAnimationFrame){ window.mozRequestAnimationFrame(loop);}
-            else if(window.oRequestAnimationFrame){ window.oRequestAnimationFrame(loop);}
-            else if(window.msRequestAnimationFrame){ window.msRequestAnimationFrame(loop);}
-            else { alert("지원하지 않는 브라우저!");}
+            if (window.requestAnimationFrame) { window.requestAnimationFrame(loop); }
+            else if (window.webkitRequestAnimationFrame) { window.webkitRequestAnimationFrame(loop); }
+            else if (window.mozRequestAnimationFrame) { window.mozRequestAnimationFrame(loop); }
+            else if (window.oRequestAnimationFrame) { window.oRequestAnimationFrame(loop); }
+            else if (window.msRequestAnimationFrame) { window.msRequestAnimationFrame(loop); }
+            else { alert("지원하지 않는 브라우저!"); }
 
             //document.getElementById("webcam-container").appendChild(webcam.canvas);
 
@@ -144,12 +165,12 @@
             await delay(1000); //시간 조절은 여기서.
             imgCanvas.remove();
             //window.requestAnimationFrame(loop);
-            if(window.requestAnimationFrame){ window.requestAnimationFrame(loop);}
-            else if(window.webkitRequestAnimationFrame){ window.webkitRequestAnimationFrame(loop);}
-            else if(window.mozRequestAnimationFrame){ window.mozRequestAnimationFrame(loop);}
-            else if(window.oRequestAnimationFrame){ window.oRequestAnimationFrame(loop);}
-            else if(window.msRequestAnimationFrame){ window.msRequestAnimationFrame(loop);}
-            else { alert("지원하지 않는 브라우저!");}
+            if (window.requestAnimationFrame) { window.requestAnimationFrame(loop); }
+            else if (window.webkitRequestAnimationFrame) { window.webkitRequestAnimationFrame(loop); }
+            else if (window.mozRequestAnimationFrame) { window.mozRequestAnimationFrame(loop); }
+            else if (window.oRequestAnimationFrame) { window.oRequestAnimationFrame(loop); }
+            else if (window.msRequestAnimationFrame) { window.msRequestAnimationFrame(loop); }
+            else { alert("지원하지 않는 브라우저!"); }
         }
 
 
@@ -328,13 +349,40 @@
             //let voices;
             //voices = window.speechSynthesis.getVoices();
 
+            if(abort == false)
+            {
             var msg = new SpeechSynthesisUtterance();
             //msg.voice = voices[12];
             msg.text = resultTitle;
-            msg.rate = 1.2;
+            msg.rate = 1.5;
             //msg.lang = 'ko-KR';
             window.speechSynthesis.speak(msg);
             //return new Promise(resolve => {msg.onend = resolve;});
+            }
+
+
+/*
+            var msg2 = new SpeechSynthesisUtterance();
+            //msg2.voice = voices[12];
+            msg2.text = resultExplain;
+            msg2.rate = 1.2;
+            //msg2.lang = 'ko-KR';
+            window.speechSynthesis.speak(msg2);
+            //return new Promise(resolve => {msg2.onend = resolve;});
+
+
+
+
+            var msg3 = new SpeechSynthesisUtterance();
+            //msg3.voice = voices[12]; //목소리 톤이 아닌 이거 언어임.
+            msg3.text = resultCeleb;
+            msg3.rate = 1.2; //재생 속도는 여기서.
+            //msg3.lang = 'ko-KR'; //필요 X
+            window.speechSynthesis.speak(msg3);
+            //return new Promise(resolve => {msg3.onend = resolve;});
+*/
+
+
 
             /*
             for(var i = 0; i < voices.length; i++)
@@ -348,9 +396,12 @@
 
 
 
-    </script>
 
-    <script>
+
+
+
+
+    
 
         // Camera setup function - returns a Promise so we have to call it in an async function
         async function setupCamera() {
@@ -362,8 +413,6 @@
                 'audio': false,
                 'video': {
                     facingMode: "environment",
-                    height: { ideal: 500 },
-                    width: { ideal: 500 },
                 },
             });
             video.srcObject = stream;
@@ -379,7 +428,27 @@
         async function drawWebcamContinuous() {
             ctx.drawImage(video, 0, 0);
 
+            //무한루프.
+
+
+
+            //반복 안함. why?
+            //init();
+            //predict();
+            //predict2();
+
+            //resultsay();
+            //console.log('testing2');
+
+            //await delay(5000); //시간 조절은 여기서.
+
+
+
+
             requestAnimationFrame(drawWebcamContinuous);
+
+
+
 
         }
 
@@ -388,10 +457,10 @@
 
         async function main() {
             // Set up front-facing camera
-            try{
-            await setupCamera();
-            video.play()
-            }catch{alert("카메라 인식 실패!");}
+            try {
+                await setupCamera();
+                video.play()
+            } catch { alert("카메라 인식 실패!"); }
 
             // Set up canvas for livestreaming
             canvas = document.getElementById('facecanvas');
