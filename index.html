@@ -141,7 +141,7 @@
             await predict();
             await predict2();
             resultsay();
-            await delay(2500); //시간 조절은 여기서.
+            await delay(1500); //시간 조절은 여기서.
             imgCanvas.remove();
             //window.requestAnimationFrame(loop);
             if(window.requestAnimationFrame){ window.requestAnimationFrame(loop);}
@@ -336,30 +336,6 @@
             window.speechSynthesis.speak(msg);
             //return new Promise(resolve => {msg.onend = resolve;});
 
-
-
-            var msg2 = new SpeechSynthesisUtterance();
-            //msg2.voice = voices[12];
-            msg2.text = resultExplain;
-            msg2.rate = 1.2;
-            //msg2.lang = 'ko-KR';
-            window.speechSynthesis.speak(msg2);
-            //return new Promise(resolve => {msg2.onend = resolve;});
-
-
-
-
-            var msg3 = new SpeechSynthesisUtterance();
-            //msg3.voice = voices[12]; //목소리 톤이 아닌 이거 언어임.
-            msg3.text = resultCeleb;
-            msg3.rate = 1.2; //재생 속도는 여기서.
-            //msg3.lang = 'ko-KR'; //필요 X
-            window.speechSynthesis.speak(msg3);
-            //return new Promise(resolve => {msg3.onend = resolve;});
-
-
-
-
             /*
             for(var i = 0; i < voices.length; i++)
             {
@@ -369,11 +345,6 @@
 
 
         }
-
-
-
-
-
 
 
 
