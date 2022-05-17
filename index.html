@@ -141,7 +141,7 @@
             await predict();
             await predict2();
             resultsay();
-            await delay(1500); //시간 조절은 여기서.
+            await delay(1000); //시간 조절은 여기서.
             imgCanvas.remove();
             //window.requestAnimationFrame(loop);
             if(window.requestAnimationFrame){ window.requestAnimationFrame(loop);}
@@ -379,27 +379,7 @@
         async function drawWebcamContinuous() {
             ctx.drawImage(video, 0, 0);
 
-            //무한루프.
-
-
-
-            //반복 안함. why?
-            //init();
-            //predict();
-            //predict2();
-
-            //resultsay();
-            //console.log('testing2');
-
-            //await delay(5000); //시간 조절은 여기서.
-
-
-
-
             requestAnimationFrame(drawWebcamContinuous);
-
-
-
 
         }
 
