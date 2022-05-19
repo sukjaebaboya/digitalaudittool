@@ -69,7 +69,7 @@
         //const URL = "C:/Users/wonju/OneDrive/Desktop/Structure_Image_Analysis/tm-my-image-model/";
 
         const URL = "https://teachablemachine.withgoogle.com/models/kx8FXr73V/"; //여기를 나중에 로컬 경로로 수정할 것. 구조부재인지 아닌지 여기서 파악.
-        const URL2 = "https://teachablemachine.withgoogle.com/models/A22tGftrI/"; 
+        const URL2 = "https://teachablemachine.withgoogle.com/models/A22tGftrI/"; //여기를 나중에 로컬 경로로 수정할 것. 구조부재인지 아닌지 여기서 파악.
 
 
         let model, webcam, labelContainer, maxPredictions, result1;
@@ -301,28 +301,28 @@
                     resultCeleb = ""
                     break;
                 case "Plane+Efflorescence":
-                    resultTitle = "균열부위가 아닌 것 같아요. 좀 더 자세하게 보여주세요."
-                    resultExplain = "1~2미터 간격에서 찍어주세요."
+                    resultTitle = "정상입니다."
+                    resultExplain = ""
                     resultCeleb = " "
                     break;
                 case "Plane+popout":
-                    resultTitle = "균열부위가 아닌 것 같아요. 좀 더 자세하게 보여주세요."
-                    resultExplain = "1~2미터 간격에서 찍어주세요."
+                    resultTitle = "정상입니다."
+                    resultExplain = ""
                     resultCeleb = " "
                     break;
                 case "Plane+Segregation":
-                    resultTitle = "균열부위가 아닌 것 같아요. 좀 더 자세하게 보여주세요."
-                    resultExplain = "1~2미터 간격에서 찍어주세요."
+                    resultTitle = "정상입니다."
+                    resultExplain = ""
                     resultCeleb = " "
                     break;
                 case "Plane+Spalling":
-                    resultTitle = "균열부위가 아닌 것 같아요. 좀 더 자세하게 보여주세요."
-                    resultExplain = "1~2미터 간격에서 찍어주세요."
+                    resultTitle = "정상입니다."
+                    resultExplain = ""
                     resultCeleb = " "
                     break;
                 default:
-                    resultTitle = "균열부위가 아닌 것 같아요. 좀 더 자세하게 보여주세요."
-                    resultExplain = "1~2미터 간격에서 찍어주세요."
+                    resultTitle = "정상입니다."
+                    resultExplain = ""
                     resultCeleb = " "
                 //code
             }
